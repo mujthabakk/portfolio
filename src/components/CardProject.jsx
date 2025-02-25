@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react'; // Removed Smartphone import
+import { ArrowRight } from 'lucide-react';
 
 const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id }) => {
   // Handle case when AppStoreLink is empty
@@ -62,7 +62,12 @@ const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id 
                   onClick={handleAppStoreClick}
                   className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200"
                 >
-                  <img src="/app-store.svg" alt="App Store" className="w-6 h-6" /> {/* Using SVG image */}
+                  <img
+                    src="app-store.svg"
+                    alt="App Store"
+                    className="w-6 h-6"
+                    onError={(e) => console.error("Failed to load App Store image", e)} // Debug if image fails
+                  />
                 </a>
 
                 {/* Play Store Icon */}
@@ -73,7 +78,12 @@ const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id 
                   onClick={handlePlayStoreClick}
                   className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors duration-200"
                 >
-                  <img src="/play-store.svg" alt="Play Store" className="w-6 h-6" /> {/* Using SVG image */}
+                  <img
+                    src="play-store.svg"
+                    alt="Play Store"
+                    className="w-6 h-6"
+                    onError={(e) => console.error("Failed to load Play Store image", e)} // Debug if image fails
+                  />
                 </a>
               </div>
 
