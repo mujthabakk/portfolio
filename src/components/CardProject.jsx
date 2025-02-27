@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Globe } from 'lucide-react'; // Adding Globe as a default web icon
 
-const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id }) => {
+const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, WebLink, id }) => {
+  // Log WebLink to the console
+  console.log("WebLink:", WebLink);
+
   // Handle case when AppStoreLink is empty
   const handleAppStoreClick = (e) => {
     if (!AppStoreLink) {
@@ -28,6 +31,9 @@ const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id 
       alert("Project details are not available");
     }
   };
+
+  // Determine if we should show the web icon
+  const showWebIcon = !AppStoreLink || !PlayStoreLink;
 
   return (
     <div className="group relative w-full h-full">
@@ -55,37 +61,56 @@ const CardProject = ({ Img, Title, Description, AppStoreLink, PlayStoreLink, id 
 
           <div className="pt-4 flex items-center justify-between">
             <div className="flex space-x-4">
-              {/* App Store Icon */}
-              <a
-                href={AppStoreLink || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleAppStoreClick}
-                className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200"
-              >
-                <img
-                  src="app-store.svg"
-                  alt="App Store"
-                  className="w-6 h-6"
-                  onError={(e) => console.error("Failed to load App Store image", e)}
-                />
-              </a>
+              {/* App Store Icon - Show only if AppStoreLink exists */}
+              {AppStoreLink && (
+                <a
+                  href={AppStoreLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleAppStoreClick}
+                  className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                >
+                  <img
+                    src="app-store.svg"
+                    alt="App Store"
+                    className="w-6 h-6"
+                    onError={(e) => console.error("Failed to load App Store image", e)}
+                  />
+                </a>
+              )}
 
-              {/* Play Store Icon */}
-              <a
-                href={PlayStoreLink || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handlePlayStoreClick}
-                className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors duration-200"
-              >
-                <img
-                  src="play-store.svg"
-                  alt="Play Store"
-                  className="w-6 h-6"
-                  onError={(e) => console.error("Failed to load Play Store image", e)}
-                />
-              </a>
+              {/* Play Store Icon - Show only if PlayStoreLink exists */}
+              {PlayStoreLink && (
+                <a
+                  href={PlayStoreLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handlePlayStoreClick}
+                  className="inline-flex items-center text-green-400 hover:text-green-300 transition-colors duration-200"
+                >
+                  <img
+                    src="play-store.svg"
+                    alt="Play Store"
+                    className="w-6 h-6"
+                    onError={(e) => console.error("Failed to load Play Store image", e)}
+                  />
+                </a>
+              )}
+
+              {/* Web Icon - Show if either AppStoreLink or PlayStoreLink is empty */}
+              {showWebIcon && (
+                <a
+                  href={WebLink} // You can replace this with a default web link if available
+                  onClick={() => console.log(`WebLink clicked: ${WebLink}`)}
+
+                  target="_blank"
+                  on
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-gray-400 hover:text-gray-300 transition-colors duration-200"
+                >
+                  <Globe className="w-6 h-6" /> {/* Using Lucide's Globe icon */}
+                </a>
+              )}
             </div>
 
             {/* Details Link */}

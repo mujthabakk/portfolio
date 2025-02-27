@@ -309,6 +309,7 @@ export default function FullWidthTabs() {
                       Title={project.Title}
                       Description={project.Description}
                       Link={project.Link}
+                      WebLink={project.Link}
                       AppStoreLink={project.AppStoreLink}
                       PlayStoreLink={project.PlayStoreLink}
                       id={project.id}
